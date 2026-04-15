@@ -15,7 +15,8 @@ public class CarritoService {
         System.out.println("precio: $" + producto.getPrecio());
         System.out.println("guardando en la base de datos");
 
-        notificadorWhatsApp.enviar(producto.getTelefono(), 
-            "Su compra de " + producto.getNombre() + " por $" + producto.getPrecio() + " ha sido registrada con éxito");
+        notificadorWhatsApp.enviar(producto.getTelefono(),
+                "Su compra de " + producto.getNombre() + " por $" + producto.getPrecio()
+                        + " ha sido registrada con éxito");
     }
 }

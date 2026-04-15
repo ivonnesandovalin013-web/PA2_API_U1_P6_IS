@@ -19,7 +19,7 @@ public class Main {
 
         @Inject
         private PedidoService pedidoService;
-        
+
         @Inject
         private CarritoService carritoService;
 

@@ -6,9 +6,34 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class PedidoService {
 
+    // @Inject
+    /*
+     * private NotificadorMail notificadorMail;
+     * 
+     * //DI por constructor
+     * 
+     * @Inject
+     * public PedidoService(NotificadorMail notificadorMail){
+     * this.notificadorMail = notificadorMail;
+     * }
+     */
+
+    // DI por atributo
+    /*
+     * @Inject
+     * private NotificadorMail notificadorMail;
+     */
+
+    // DI por metodo
+    /*private NotificadorMail notificadorMail;
+
     @Inject
-    private NotificadorMail notificadorMail;
-    
+    public void setNotificador(NotificadorMail notificadorMail) {
+        this.notificadorMail = notificadorMail;
+    }*/
+        @Inject
+        private NotificadorSelector selector;
+
     public void registrar(Pedido pedido) {
         // Lógica para registrar el pedido
         System.out.println("registrando pedido");
@@ -16,12 +41,11 @@ public class PedidoService {
         System.out.println("Total " + pedido.getTotal());
         System.out.println("guardando en la base de datos");
 
-       
-        notificadorMail.enviar(pedido.getCorreo(), "Su pedido ha sido registrado con éxito");
-
+        Notificador notificador = this.selector.seleccionar(pedido.getTotal());
+        notificador.enviar(pedido.getDestino(), "Pedido Registrado");
+        
 
     }
 
-
-
 }
+
