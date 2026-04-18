@@ -27,25 +27,30 @@ public class Main {
         //private PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
         //@Inject
         //private CarritoService carritoService;
+        @Inject
+        private PagoTarjetaCredito pagoT;
+        @Inject
+        private PagoEfectivo pagoE;
 
         @Override
         public int run(String... args) {
 
             //Caso 1
             System.out.println("------CASO 1------");
-            PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
             Pedido pedido = new Pedido("Ivonne Sandovalin", "Coca Cola", 90, "invonne@gmail.com");
-            pedidoService.registrar(pedido);
+            this.pedidoService.registrar(pedido, pagoE );
 
             //Caso 2
-            /*System.out.println("\n------CASO 2------");
-            Pedido pedido2 = new Pedido("Ivonne Sandovalin", "Coca Cola", 120, "invonne@gmail.com");
-            pedidoService.registrar(pedido2);
+            System.out.println("\n------CASO 2------");
+            Pedido pedido2 = new Pedido("Ivonne Sandovalin", "Coca Cola", 120,null);
+            pedidoService.registrar(pedido2, pagoT);
 
             //Caso 2
-            System.out.println("\n------CASO 3------");
+            /*System.out.println("\n------CASO 3------");
             Pedido pedido3 = new Pedido("Ivonne Sandovalin", "Coca Cola", 40, "invonne@gmail.com");
             pedidoService.registrar(pedido3);*/
+
+
 
             return 0;
         }
