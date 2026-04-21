@@ -3,10 +3,8 @@ package uce.edu.pa2.api.bodega;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
-import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
-import uce.edu.pa2.api.deber.Producto;
-import uce.edu.pa2.api.deber.CarritoService;
+
 
 @QuarkusMain
 public class Main {
@@ -17,40 +15,51 @@ public class Main {
     }
 
     public static class App implements QuarkusApplication {
+        @Inject
+        private AmbitoAplicacion ambitoAplicacion;
 
-        //Modelos de IoC
-        //1. DI
         @Inject
-        private PedidoService pedidoService;
+        private ClaseIntermedia claseIntermedia;
 
-        //2. Service Locator (Lookup)
-        //private PedidoService pedidoService = CDI.current().select(PedidoService.class).get();
-        //@Inject
-        //private CarritoService carritoService;
         @Inject
-        private PagoTarjetaCredito pagoT;
+        private AmbitoRequest ambitoRequest;
+
         @Inject
-        private PagoEfectivo pagoE;
+        private AmbitoInject ambitoInject;
+
+        @Inject
+        private AmbitoSingleton ambitoSingleton;
 
         @Override
         public int run(String... args) {
 
-            //Caso 1
-            System.out.println("------CASO 1------");
-            Pedido pedido = new Pedido("Ivonne Sandovalin", "Coca Cola", 90, "invonne@gmail.com");
-            this.pedidoService.registrar(pedido, pagoE );
+            System.out.println(this.ambitoAplicacion);
 
-            //Caso 2
-            System.out.println("\n------CASO 2------");
-            Pedido pedido2 = new Pedido("Ivonne Sandovalin", "Coca Cola", 120,null);
-            pedidoService.registrar(pedido2, pagoT);
+            System.out.println(this.ambitoAplicacion.incrementar());
+            System.out.println(this.ambitoAplicacion.incrementar());
+            System.out.println(this.ambitoAplicacion.incrementar());
 
-            //Caso 2
-            /*System.out.println("\n------CASO 3------");
-            Pedido pedido3 = new Pedido("Ivonne Sandovalin", "Coca Cola", 40, "invonne@gmail.com");
-            pedidoService.registrar(pedido3);*/
+            this.claseIntermedia.imprimirObjetoValor();
 
+            System.out.println("*********************AMBITO REQUEST**********************");
+            /*System.out.println(this.ambitoRequest.incrementar());
+            System.out.println(this.ambitoRequest.incrementar());
+            System.out.println(this.ambitoRequest.incrementar());*/
 
+            System.out.println("*********************AMBITO DEPENDENT**********************");
+            System.out.println(this.ambitoInject.incrementar());
+            System.out.println(this.ambitoInject.incrementar());
+            System.out.println(this.ambitoInject.incrementar());
+
+            this.claseIntermedia.imprimirObjetoValorInject();
+
+            System.out.println("*********************AMBITO SINGLETON**********************");
+            System.out.println(this.ambitoAplicacion);
+            System.out.println(this.ambitoSingleton.incrementar());
+            System.out.println(this.ambitoSingleton.incrementar());
+            System.out.println(this.ambitoSingleton.incrementar());
+
+            this.claseIntermedia.imprimirObjetoValorSingleton();
 
             return 0;
         }
