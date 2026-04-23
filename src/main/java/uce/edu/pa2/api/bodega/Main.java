@@ -15,51 +15,25 @@ public class Main {
     }
 
     public static class App implements QuarkusApplication {
-        @Inject
-        private AmbitoAplicacion ambitoAplicacion;
 
         @Inject
-        private ClaseIntermedia claseIntermedia;
-
+        private ProcesadorVentaService procesadorVentaService;
         @Inject
-        private AmbitoRequest ambitoRequest;
-
-        @Inject
-        private AmbitoInject ambitoInject;
-
-        @Inject
-        private AmbitoSingleton ambitoSingleton;
+        private EstadisticasVentasGlobales estadisticasVentasGlobales;
 
         @Override
         public int run(String... args) {
 
-            System.out.println(this.ambitoAplicacion);
+            Venta v1 = new Venta("Ivonne Sandovalin", 70.0);
+            this.procesadorVentaService.procesar(v1);
 
-            System.out.println(this.ambitoAplicacion.incrementar());
-            System.out.println(this.ambitoAplicacion.incrementar());
-            System.out.println(this.ambitoAplicacion.incrementar());
+            Venta v2 = new Venta("Nayelt Tarco", 40.0);
+            this.procesadorVentaService.procesar(v2);
 
-            this.claseIntermedia.imprimirObjetoValor();
-
-            System.out.println("*********************AMBITO REQUEST**********************");
-            /*System.out.println(this.ambitoRequest.incrementar());
-            System.out.println(this.ambitoRequest.incrementar());
-            System.out.println(this.ambitoRequest.incrementar());*/
-
-            System.out.println("*********************AMBITO DEPENDENT**********************");
-            System.out.println(this.ambitoInject.incrementar());
-            System.out.println(this.ambitoInject.incrementar());
-            System.out.println(this.ambitoInject.incrementar());
-
-            this.claseIntermedia.imprimirObjetoValorInject();
-
-            System.out.println("*********************AMBITO SINGLETON**********************");
-            System.out.println(this.ambitoAplicacion);
-            System.out.println(this.ambitoSingleton.incrementar());
-            System.out.println(this.ambitoSingleton.incrementar());
-            System.out.println(this.ambitoSingleton.incrementar());
-
-            this.claseIntermedia.imprimirObjetoValorSingleton();
+            Venta v3 = new Venta("David Castillo", 20.0);
+            this.procesadorVentaService.procesar(v3);
+            
+            this.estadisticasVentasGlobales.mostrarEstadisticasGlobales();
 
             return 0;
         }
