@@ -1,8 +1,10 @@
 package uce.edu.pa2.api.bodega;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 
-@ApplicationScoped
+//@ApplicationScoped
+@Dependent
 public class EstadisticasVentasGlobales {
     private int totalVentas = 0;
     private double montoTotalVendido = 0;

@@ -4,16 +4,15 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class ProcesadorVentaService {
+public class ProcesadorVentaEnLineaService {
 
     @Inject
     private EstadisticasVentasGlobales estadisticasVentasGlobales;
-    @Inject//Aqui como inyecto traking venta se crea un objeto
+    @Inject // Aqui como inyecto traking venta se crea un objeto
     private TrakingVenta trakingVenta;
 
     public void procesar(Venta venta) {
 
-        trakingVenta.reiniciar();
         // inicia la venta
         this.trakingVenta.iniciar();
         System.out.println("Procesando pedido");
@@ -34,5 +33,4 @@ public class ProcesadorVentaService {
         this.estadisticasVentasGlobales.registrarVenta(venta.getTotal());
 
     }
-
 }
