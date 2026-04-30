@@ -1,11 +1,13 @@
 package uce.edu.pa2.api.bodega;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @MedirTiempo // no se ejecuta el interceptor si no para que se vincule con la anotacion
 @Interceptor
+@Priority(2)
 public class MedirTiempoInterceptor {
     @AroundInvoke // indicamos que este metodo se ejecutara alrededor de la ejecucion de un
                   // metodo. Cada vez que se invoque al metodo procesar se ejecutara el metodo
@@ -13,6 +15,7 @@ public class MedirTiempoInterceptor {
     public Object medir(InvocationContext context) throws Exception { // Debe retonar un object, reciba un
                                                                       // InvocationContext y lanzar una exception.
         System.out.println("Se ejecuto antes del metodo ");
+        System.out.println("Metodo interceptado: " + context.getMethod().getName());
         long inicio = System.currentTimeMillis();
 
         Object resultado = context.proceed(); // Inicia la ejecucion del metodo original, si no se llama al proceed
