@@ -5,6 +5,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
+
 @ApplicationScoped
 public class ProcesadorCompraService  {
     //Va a ser un coleccion de las implementaciones de la siguiente interfaz
@@ -21,5 +22,7 @@ public class ProcesadorCompraService  {
         System.out.println("Su valor a pagar es: " + compra.getTotal());
 
     }
+
+    
 
 }
