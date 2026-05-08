@@ -1,8 +1,10 @@
 package uce.edu.pa2.api.tarea5;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Priority(2)
 public class CuponFacebook implements Cupones {
 
     @Override
