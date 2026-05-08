@@ -22,7 +22,7 @@ public class Main {
         public int run(String... args) {
 
             Compra comp1 = new Compra("Ivonne Sandovalin", Double.valueOf(100));
-            this.compraService.procesar(comp1);
+            this.compraService.procesarCupon(comp1);
 
             return 0;
         }
